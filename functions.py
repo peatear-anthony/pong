@@ -29,25 +29,19 @@ def check_ball_collisions(settings, screen, paddles, ball):
     elif ball.rect.bottom >= paddles[1].rect.top:
         check_ball_paddle_collisions(settings, screen, paddles, ball)
     elif ball.rect.left <= 0:
-        hit_left_wall()
+        hit_wall_update_speed(ball)
     elif ball.rect.right >= screen.get_rect().right:
-        hit_right_wall()
+        hit_wall_update_speed(ball)
 
 def check_ball_paddle_collisions(settings, screen, paddles, ball):
     if pygame.sprite.collide_rect(ball, paddles[0]):
-        __calc_dist_from_center(ball.rect.centerx, 
-            paddles[0].rect.centerx)
+        __update_ball_speed(settings,ball, paddles[0])
 
     elif pygame.sprite.collide_rect(ball, paddles[1]):
-        __calc_dist_from_center(ball.rect.centerx, 
-            paddles[1].rect.centerx)
+        __update_ball_speed(settings, ball, paddles[1])
 
-def hit_left_wall():
-    print("To do")
-
-def hit_right_wall():
-    print("To do")
-
+def hit_wall_update_speed(ball):
+    ball.vel_x *= -1
 
 
 ##########################Privite functions####################################
@@ -74,5 +68,20 @@ def __check_keyup_events(event, settings, paddles):
     elif event.key == pygame.K_a:
         paddles[1].moving_left = False
 
-def __calc_dist_from_center(ball_x, paddle_x):
-    print("lol")
+def __update_ball_speed(settings, ball, paddle):
+    norm_ball_x = int(ball.rect.centerx - paddle.rect.left)
+
+    if norm_ball_x <=0:
+        norm_ball_x = 1
+    elif norm_ball_x >= paddle.rect.width:
+        norm_ball_x = paddle.rect.width
+
+    ball.vel_x = settings.ball_speed_magnitude *\
+        settings.paddlex_to_velx[norm_ball_x]
+
+    if paddle.player == 1:
+        ball.vel_y = settings.ball_speed_magnitude *\
+        settings.paddlex_to_vely[norm_ball_x]
+    elif paddle.player ==2:
+        ball.vel_y = -1* settings.ball_speed_magnitude *\
+        settings.paddlex_to_vely[norm_ball_x]

@@ -32,7 +32,7 @@ class Paddle(Sprite):
         self.speed_factor = self.settings.paddle_speed_factor
 
     def center_paddle(self):
-        self.center = self.screen_rect.centerx
+        self.center = float(self.screen_rect.centerx)
 
     def update(self):
         """ Update the position of the paddle"""

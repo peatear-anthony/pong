@@ -1,7 +1,7 @@
 import pygame
 import sys
 from settings import Settings
-from utils import *
+from objects import *
 import functions as f
 
 def run_game():
