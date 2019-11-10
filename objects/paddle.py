@@ -4,14 +4,17 @@ from pygame.sprite import Sprite
 class Paddle(Sprite):
     """ A class to represent the player's paddle"""
 
-    def __init__(self, settings, screen, player):
+    def __init__(self, settings, screen, stats, player):
         """Initialize the paddles and set the starting position"""
         super(Paddle, self).__init__()
 
         self.screen = screen
         self.screen_rect = self.screen.get_rect()
         self.settings = settings
+        self.stats = stats
         self.player = player
+        self.score = 0
+        self.shoot_mode = False
         self.moving_right = False
         self.moving_left = False
 
@@ -21,7 +24,7 @@ class Paddle(Sprite):
         self.rect.centerx = self.screen_rect.centerx
         
         # Set starting heights repective to player
-        if player == 1:
+        if self.player == 1:
             self.rect.top = 0
         else:
             self.rect.bottom = self.screen_rect.bottom
@@ -33,6 +36,12 @@ class Paddle(Sprite):
 
     def center_paddle(self):
         self.center = float(self.screen_rect.centerx)
+
+    def increment_point(self):
+        if self.player == 1:
+            self.stats.player_1_score += 1
+        elif self.player ==2:
+            self.stats.player_2_score += 1
 
     def update(self):
         """ Update the position of the paddle"""

@@ -1,5 +1,5 @@
-import pygame
 import sys
+import pygame
 from settings import Settings
 from objects import *
 import functions as f
@@ -10,26 +10,28 @@ def run_game():
     screen = pygame.display.set_mode((settings.width, settings.length))
     pygame.display.set_caption(settings.title)
 
+    #Game stats
+    stats = GameStats(settings)
+
+    #Scoreboard
+    scoreboard = Scoreboard(settings, screen, stats)
+    scoreboard.prep_score()
+
     # Create two paddles for each player
-    paddle1 = Paddle(settings, screen, player = 1)
-    paddle2 = Paddle(settings, screen, player = 2)
+    paddle1 = Paddle(settings, screen, stats, player = 1)
+    paddle2 = Paddle(settings, screen, stats,  player = 2)
     paddles = [paddle1, paddle2]
 
     # Create one ball
     ball = Ball(settings, screen)
 
-
     while True:
-
-        f.check_events(settings, screen, paddles, ball)
-
+        f.check_events(settings, stats, screen, paddles, ball)
         for paddle in paddles:
             paddle.update()
-
-        f.update_ball(settings, screen, paddles, ball)
-
-        f.update_screen(settings, screen, paddles, ball)
-
+        f.update_ball(settings, stats, screen, scoreboard, paddles, ball)
+        f.update_screen(settings,stats, screen, scoreboard, 
+            paddles, ball)
 
 if __name__ == "__main__":
     run_game()
