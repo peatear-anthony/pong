@@ -1,8 +1,8 @@
 # Pong
-Pong recreated using pygame
+Simple game of pong recreated using pygame.
 
 ### Installing
-Install requirements
+* Install requirements
 ```sh
 pip install -r requirements.txt
 ```
