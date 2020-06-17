@@ -10,19 +10,19 @@ def run_game():
     screen = pygame.display.set_mode((settings.width, settings.length))
     pygame.display.set_caption(settings.title)
 
-    #Game stats
+    # Init Game stats
     stats = GameStats(settings)
 
-    #Scoreboard
+    # Init Scoreboard
     scoreboard = Scoreboard(settings, screen, stats)
     scoreboard.prep_score()
 
-    # Create two paddles for each player
+    # Init paddle for each player
     paddle1 = Paddle(settings, screen, stats, player = 1)
     paddle2 = Paddle(settings, screen, stats,  player = 2)
     paddles = [paddle1, paddle2]
 
-    # Create one ball
+    # Init  ball
     ball = Ball(settings, screen)
 
     while True:

@@ -3,7 +3,6 @@ import numpy as np
 
 class Settings():
     def __init__(self):
-        #
         self.title = "Peter Pong"
         # Screen settings
         self.width = 1000
@@ -15,13 +14,13 @@ class Settings():
         self.paddle_height = 20
         self.paddle_sections = 13 #Must be odd
         self.paddle_color = (10, 25, 0)
-        self.paddle_speed_factor = 0.8
+        self.paddle_speed_factor = 1.0
         self._update_paddle_width()
 
         # Ball settings
-        self.ball_diameter = 15
-        self.ball_color = (0, 0, 0)
-        self.ball_speed_magnitude = 1.2
+        self.ball_diameter = 13
+        self.ball_color = (255, 255, 0)
+        self.ball_speed_magnitude = 1.0
         self.ball_x_speed_levels = (self.paddle_sections-1)/2
 
         # Mode
